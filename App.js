@@ -1,27 +1,88 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, SafeAreaView } from 'react-native';
-import CatControl from './components/CatControl';
+import NewCatScreen from './screens/NewCatScreen';
+import HomeScreen from './screens/HomeScreen';
+import catsReducer from './reducers/CatsReducer';
+import {Provider} from 'react-redux';
+import {createStore} from 'redux';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+// import { CatsContext } from './screens/CatsContext';
 
-export default function App() {
-  return (
-    <SafeAreaView style={styles.container}>
-      <Text>Catabase</Text>
-      {/* <Header /> */}
-      <CatControl />
-      <StatusBar style="auto" />
-    </SafeAreaView>
-  );
+const store = createStore(catsReducer);
+const Stack = createStackNavigator();
+
+class App extends React.Component {
+  // constructor(props){
+  //   super(props)
+  //   this.state = {
+  //     possibleCats: [
+  //       'Bobott',
+  //       'Zahara',
+  //       'Mister Meowmers'
+  //     ],
+  //     currentCats: [],
+  //   }
+  // }
+
+  // addCat = (index) => {
+  //   const {
+  //     currentCats,
+  //     possibleCats,
+  //   } = this.state
+
+  //   const addedCat = possibleCats.splice(index, 1)
+  //   currentCats.push(addedCat)
+  //   this.setState({
+  //     currentCats,
+  //     possibleCats,
+  //   })
+  // }
+
+  render(){
+    return (
+      <Provider 
+        store={store}
+        // value={
+        //   {
+        //     currentCats: this.state.currentCats,
+        //     possibleCats: this.state.possibleCats,
+        //     addCat: this.addCat
+        //   }
+        // }
+      >
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen
+              name="Catabase"
+              component={HomeScreen}
+              options={{
+                headerStyle: {
+                  backgroundColor: '#FCE',
+                },
+                headerTintColor: '#604',
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                },
+              }}
+            />
+            <Stack.Screen
+              name="New Cat"
+              component={NewCatScreen}
+              options={{
+                headerStyle: {
+                  backgroundColor: '#FCE',
+                },
+                headerTintColor: '#604',
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                },
+              }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </Provider>
+    );
+  }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
-
-
-///
+export default App;
