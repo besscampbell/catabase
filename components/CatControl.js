@@ -1,5 +1,7 @@
 import React, {Component } from 'react';
 import {View, Text} from 'react-native';
+import NewCat from './NewCat';
+import Cats from './Cats';
 
 class CatControl extends Component {
   render() {
@@ -10,8 +12,10 @@ class CatControl extends Component {
         justifyContent:'center'
       }}> 
         <Text>
-          Hello
+          Hello 😿
         </Text>
+        <NewCat />
+        <Cats />
       </View>
     );
   }
