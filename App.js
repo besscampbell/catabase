@@ -2,6 +2,7 @@ import React from 'react';
 import NewCatScreen from './screens/NewCatScreen';
 import HomeScreen from './screens/HomeScreen';
 import catsReducer from './reducers/CatsReducer';
+import Form from './components/Form';
 import {Provider} from 'react-redux';
 import {createStore} from 'redux';
 import { NavigationContainer } from '@react-navigation/native';
@@ -42,13 +43,6 @@ class App extends React.Component {
     return (
       <Provider 
         store={store}
-        // value={
-        //   {
-        //     currentCats: this.state.currentCats,
-        //     possibleCats: this.state.possibleCats,
-        //     addCat: this.addCat
-        //   }
-        // }
       >
         <NavigationContainer>
           <Stack.Navigator>
@@ -66,8 +60,21 @@ class App extends React.Component {
               }}
             />
             <Stack.Screen
-              name="New Cat"
+              name="Cat List"
               component={NewCatScreen}
+              options={{
+                headerStyle: {
+                  backgroundColor: '#FCE',
+                },
+                headerTintColor: '#604',
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                },
+              }}
+            />
+             <Stack.Screen
+              name="New Cat"
+              component={Form}
               options={{
                 headerStyle: {
                   backgroundColor: '#FCE',

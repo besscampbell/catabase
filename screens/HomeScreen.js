@@ -8,12 +8,17 @@ class HomeScreen extends Component {
     return (
       <View style={styles.container}> 
         <Text>
-          You have {this.props.cats.current.length } 😿 cats.
+          You have {this.props.cats.length} 😿 cats.
         </Text>
         <Button
           title="Add some cats"
           onPress={() =>
             this.props.navigation.navigate('New Cat')}/>
+        <Text>*****</Text>
+        <Button
+          title="Cat List"
+          onPress={() =>
+            this.props.navigation.navigate('Cat List')}/>
       </View>
     );
   }

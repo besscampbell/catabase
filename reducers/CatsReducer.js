@@ -10,18 +10,29 @@ c.INITIAL_STATE = {
   ],
 };
 
-const catsReducer = (state = c.INITIAL_STATE, action) => {
+const catsReducer = (state = {}, action) => {
+  const { catName, catColoring, id } = action;
   switch (action.type) {
     case c.ADD_CAT:
-      const {
-        current, 
-        possible,
-      } = state;
+      return Object.assign(
+        {},
+        state,
+        {
+          [id]: {
+            catName,
+            catColoring,
+            id
+          }
+        });
+      // const {
+      //   current,
+      //   possible,
+      // } = state;
 
-      const addedCat = possible.splice(action.payload, 1);
-      current.push(addedCat);
-      const newState = { current, possible };
-      return newState;
+      // const addedCat = possible.splice(action.payload, 1);
+      // current.push(addedCat);
+      // const newState = { current, possible };
+      // return newState;
     default:
       return state
   }
