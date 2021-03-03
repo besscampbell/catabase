@@ -38,11 +38,20 @@ function Cats(){
   if(isLoaded(cats)){
     return(
       <View style={styles.cats}>
-        <Text >{cats.map((cat) => (
+        {"\n"}
+        {cats.map((cat) => {
+          return <Cat
+            catName={cat.catName}
+            catColoring={cat.catColoring}
+            id={cat.id}
+            key={cat.id} />
+        })}
 
-        <Text> {cat.catName}</Text>
-        ))}
-        </Text>
+
+        {/* // <Text> {cat.catName}
+        //  {cat.catColoring}{"\n"}</Text>
+        // ))}
+        // </Text> */}
       </View>
     );
   } else {

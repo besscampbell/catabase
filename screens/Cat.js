@@ -1,15 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {View} from 'react-native';
+import {View, StyleSheet, Text} from 'react-native';
 
 function Cat(props){
   return (
-    <View>
-      <Text>{props.catName}</Text>
-      <Text>{props.catColoring}</Text>
+    <View style={styles.cat}>
+      <Text style={styles.text}>😻 Name: {props.catName} 😺 Coloring: {props.catColoring}{"\n"}</Text>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  cat: {
+    flex: 1,
+    backgroundColor: '#FCE',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  text: {
+    fontSize: 100,
+    fontFamily: 'serif',
+    textTransform: 'capitalize',
+    fontWeight: 'bold'
+  }
+});
 
 Cat.propTypes = {
   catName: PropTypes.string,

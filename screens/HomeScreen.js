@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 class HomeScreen extends Component {
   render() {
     return (
-      <View style={styles.container}> 
+      <View style={styles.container}>
         <Text>
           You have {this.props.cats.length} 😿 cats.
         </Text>
