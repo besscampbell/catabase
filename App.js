@@ -1,8 +1,8 @@
 import React from 'react';
 import NewCatScreen from './screens/NewCatScreen';
 import HomeScreen from './screens/HomeScreen';
+import FormScreen from './screens/FormScreen';
 import catsReducer from './reducers/CatsReducer';
-import Form from './components/Form';
 import {Provider} from 'react-redux';
 import {createStore} from 'redux';
 import { NavigationContainer } from '@react-navigation/native';
@@ -74,7 +74,7 @@ class App extends React.Component {
             />
              <Stack.Screen
               name="New Cat"
-              component={Form}
+              component={FormScreen}
               options={{
                 headerStyle: {
                   backgroundColor: '#FCE',

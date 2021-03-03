@@ -1,35 +1,43 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {useForm, Controller} from 'react-hook-form';
-import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
 
 
-export default function Form(){
-  const {control, register, handleSubmit, setValue, errors } = useForm();
+
+
+function FormScreen({navigation}){
+  const {control, handleSubmit, errors } = useForm();
   const catNameInputRef = React.useRef();
   const catColoringInputRef = React.useRef();
-  const onSubmit = data=> {
+  const onSubmit = (data)=> {
     console.log(data);
   };
-  console.log('errors', errors)
+  const onError = (errors) => {
+    console.log(errors)
+  };
+  const functionOne = handleSubmit(onSubmit, onError);
 
-  // useEffect(() => {
-  //   register("catName");
-  //   register("catColoring");
-  // }, [register]);
-
-  // renderCount++;
-
+  const functionTwo = () =>{
+    navigation.navigate('Cat List');
+  }
+  const mixFunction = () =>{
+    functionOne();
+    functionTwo();
+  }
   return (
     <View style={styles.container}>
       <View>
         <Text style={styles.text}>Cat's Name</Text>
-        <Controller 
-          name="catName" 
+        <Controller
+          name="catName"
+          defaultValue=""
           control={control}
           rules={{required: 'This is required'}}
-          onFocus={() => {}}
+          onFocus={() => {
+            catNameInputRef.current.focus();
+          }}
           render={(props) => (
-            <TextInput 
+            <TextInput
               {...props}
               style={styles.input}
               ref={catNameInputRef}
@@ -42,12 +50,16 @@ export default function Form(){
       </View>
       <View>
         <Text style={styles.text}>Coloring</Text>
-        <Controller 
-          name="catColoring" 
-          control={control} 
+        <Controller
+          name="catColoring"
+          defaultValue=""
+          control={control}
           rules={{required: 'This is required'}}
+          onFocus={() => {
+            catColoringInputRef.current.focus();
+          }}
           render={(props) => (
-            <TextInput 
+            <TextInput
               {...props}
               style={styles.input}
               ref={catColoringInputRef}
@@ -58,14 +70,15 @@ export default function Form(){
           )}
         />
       </View>
-
-      {/* <Text styles={styles.text}>Render Counter: {renderCount}</Text> */}
       <View style={styles.button}>
         <Button
           title="+Cat"
           color="white"
           style={styles.buttonText}
-          onPress={handleSubmit(onSubmit)}
+          // onPress={handleSubmit(onSubmit, onError),
+          //   () =>navigation.navigate('Cat List')
+          // }
+          onPress={() => {mixFunction()}}
         />
       </View>
     </View>
@@ -99,3 +112,4 @@ const styles = StyleSheet.create({
   }
 });
 
+export default FormScreen;

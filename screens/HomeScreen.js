@@ -1,7 +1,6 @@
 import React, {Component } from 'react';
 import {View, Text, StyleSheet, Button} from 'react-native';
 import { connect } from 'react-redux';
-// import { CatsContext } from './CatsContext';
 
 class HomeScreen extends Component {
   render() {
@@ -23,7 +22,6 @@ class HomeScreen extends Component {
     );
   }
 }
-// HomeScreen.contextType = CatsContext;
 
 const styles = StyleSheet.create({
   container: {
