@@ -1,16 +1,18 @@
 import React from 'react';
 import {useForm, Controller} from 'react-hook-form';
 import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
+import { useFirestore } from 'react-redux-firebase';
 
-
-
-
-function FormScreen({navigation}){
+function FormScreen({navigation}, props){
   const {control, handleSubmit, errors } = useForm();
   const catNameInputRef = React.useRef();
   const catColoringInputRef = React.useRef();
+  const firestore = useFirestore();
   const onSubmit = (data)=> {
-    console.log(data);
+    return firestore.collection('cats').add({
+      catName: data.catName,
+      catColoring: data.catColoring
+    })
   };
   const onError = (errors) => {
     console.log(errors)

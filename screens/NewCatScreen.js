@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux';
 import { View, Text, StyleSheet, Button, SafeAreaView } from 'react-native';
 import { addCat } from '../actions/index';
 import { TextInput } from 'react-native-gesture-handler';
-// import { CatsContext } from './CatsContext';
 
 class NewCatScreen extends React.Component {
   render(){
@@ -13,17 +12,7 @@ class NewCatScreen extends React.Component {
         <Text>
           This is where we will Add a Cat 🙀
           </Text>
-          {/* {
-            this.props.cats.possible.map((cat, index) => (
-              <Button
-                key={ cat }
-                title={`Add ${ cat }` }
-                onPress={() =>
-                this.props.addCat(index)
-              }
-              />
-            ))
-          } */}
+          
         <Button
           title="Back to Home"
           color="#841584"

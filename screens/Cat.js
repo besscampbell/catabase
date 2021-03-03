@@ -13,7 +13,8 @@ function Cat(props){
 
 Cat.propTypes = {
   catName: PropTypes.string,
-  catColoring: PropTypes.string
+  catColoring: PropTypes.string,
+  id: PropTypes.string,
 }
 
 export default Cat;

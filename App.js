@@ -1,5 +1,5 @@
 import React from 'react';
-import NewCatScreen from './screens/NewCatScreen';
+import Cats from './screens/Cats';
 import HomeScreen from './screens/HomeScreen';
 import FormScreen from './screens/FormScreen';
 import catsReducer from './reducers/CatsReducer';
@@ -7,43 +7,32 @@ import {Provider} from 'react-redux';
 import {createStore} from 'redux';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-// import { CatsContext } from './screens/CatsContext';
+import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
+import { createFirestoreInstance } from 'redux-firestore';
+import firebase from './firebase';
+import '@react-native-firebase/auth';
 
-const store = createStore(catsReducer);
-const Stack = createStackNavigator();
+function App() {
 
-class App extends React.Component {
-  // constructor(props){
-  //   super(props)
-  //   this.state = {
-  //     possibleCats: [
-  //       'Bobott',
-  //       'Zahara',
-  //       'Mister Meowmers'
-  //     ],
-  //     currentCats: [],
-  //   }
-  // }
+  const store = createStore(catsReducer);
+  const Stack = createStackNavigator();
+  const rrfProps = {
+    firebase: firebase,
+    config: {
+      userProfile: "users",
+      // useFirestoreForProfile: true,
+    },
+    dispatch: store.dispatch,
+    createFirestoreInstance: createFirestoreInstance,
+  }
 
-  // addCat = (index) => {
-  //   const {
-  //     currentCats,
-  //     possibleCats,
-  //   } = this.state
+  store.subscribe(() => console.log(store.getState()));
 
-  //   const addedCat = possibleCats.splice(index, 1)
-  //   currentCats.push(addedCat)
-  //   this.setState({
-  //     currentCats,
-  //     possibleCats,
-  //   })
-  // }
-
-  render(){
-    return (
-      <Provider 
-        store={store}
-      >
+  return (
+    <Provider
+      store={store}
+    >
+      <ReactReduxFirebaseProvider {...rrfProps}>
         <NavigationContainer>
           <Stack.Navigator>
             <Stack.Screen
@@ -61,7 +50,7 @@ class App extends React.Component {
             />
             <Stack.Screen
               name="Cat List"
-              component={NewCatScreen}
+              component={Cats}
               options={{
                 headerStyle: {
                   backgroundColor: '#FCE',
@@ -72,7 +61,7 @@ class App extends React.Component {
                 },
               }}
             />
-             <Stack.Screen
+              <Stack.Screen
               name="New Cat"
               component={FormScreen}
               options={{
@@ -87,9 +76,10 @@ class App extends React.Component {
             />
           </Stack.Navigator>
         </NavigationContainer>
-      </Provider>
-    );
-  }
+      </ReactReduxFirebaseProvider>
+    </Provider>
+  );
+
 }
 
 export default App;

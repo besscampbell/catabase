@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { firestoreReducer } from 'redux-firestore';
 import * as c from '../actions/ActionTypes';
 
 c.INITIAL_STATE = {
@@ -24,20 +25,12 @@ const catsReducer = (state = {}, action) => {
             id
           }
         });
-      // const {
-      //   current,
-      //   possible,
-      // } = state;
-
-      // const addedCat = possible.splice(action.payload, 1);
-      // current.push(addedCat);
-      // const newState = { current, possible };
-      // return newState;
     default:
       return state
   }
 };
 
 export default combineReducers({
-  cats: catsReducer
+  cats: catsReducer,
+  firestore: firestoreReducer
 });
