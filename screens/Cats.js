@@ -4,70 +4,48 @@ import { StyleSheet } from 'react-native';
 import {View, Text} from 'react-native';
 import { useSelector } from 'react-redux';
 import { useFirestoreConnect, isLoaded } from 'react-redux-firebase';
-// import firestore from '@react-native-firebase/firestore';
-// import * as firebase from 'firebase'
-// import firestore from 'firebase/firestore'
-
 
 function Cats(){
 
-  // firestore()
-  //   .collection('cats')
-  //   .get()
-  //   .then(querySnapshot => {
-  //     console.log('Total cats:', querySnapshot.size);
-
-  //     querySnapshot.forEach(documentSnapshot => {
-  //       console.log('Cat id:', documentSnapshot.id, documentSnapshot.data())
-  //     });
-  //   });
   useFirestoreConnect([
     {collection: 'cats'}
   ]);
 
   const cats = useSelector(state=> state.firestore.ordered.cats);
   console.log(cats);
-  // <Text>Add cats here!</Text>
-  // {this.context.possibleCats.map((cat, index) => (
-  //   <Button
-  //     key={cat}
-  //     title={`Add ${cat}`}
-  //     onPress={() => this.context.addCat(index)}
-  //   />
-  // ))}
+
   if(isLoaded(cats)){
     return(
       <View style={styles.cats}>
-        {"\n"}
-        {cats.map((cat) => {
-          return <Cat
-            catName={cat.catName}
-            catColoring={cat.catColoring}
-            id={cat.id}
-            key={cat.id} />
-        })}
-
-
-        {/* // <Text> {cat.catName}
-        //  {cat.catColoring}{"\n"}</Text>
-        // ))}
-        // </Text> */}
+        <Text style={styles.cats}>
+          {"\n"}
+          {cats.map((cat) => {
+            return <Cat
+              catName={cat.catName}
+              catColoring={cat.catColoring}
+              id={cat.id}
+              key={cat.id} />
+          })}
+        </Text>
+        {/* view not working on mobile */}
       </View>
     );
   } else {
     return (
-      <View>
+      <View style={styles.cat}>
         <Text>Loading...</Text>
       </View>
     )
-  }    
+  }
 }
 
 const styles = StyleSheet.create({
-  cats: {
-    textAlign: 'center',
-    color: 'red'
-  }
+  cat: {
+    flex: 1,
+    backgroundColor: '#FCE',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 })
 
 export default Cats;

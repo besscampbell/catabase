@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
 
   text: {
     fontSize: 100,
-    fontFamily: 'serif',
+    // fontFamily: 'serif',
     textTransform: 'capitalize',
     fontWeight: 'bold'
   }

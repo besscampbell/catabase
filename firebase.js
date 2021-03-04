@@ -1,6 +1,5 @@
-// import firebase from '@react-native-firebase/app';
 import * as firebase from 'firebase';
-// import firestore from '@react-native-firebase/firestore';
+import 'firebase/firestore';
 import {
     REACT_APP_FIREBASE_API_KEY,
     REACT_APP_FIREBASE_AUTH_DOMAIN,

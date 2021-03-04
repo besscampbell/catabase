@@ -10,7 +10,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
 import { createFirestoreInstance } from 'redux-firestore';
 import firebase from './firebase';
-import '@react-native-firebase/auth';
+
 
 function App() {
 
@@ -79,7 +79,7 @@ function App() {
       </ReactReduxFirebaseProvider>
     </Provider>
   );
-
 }
+
 
 export default App;
